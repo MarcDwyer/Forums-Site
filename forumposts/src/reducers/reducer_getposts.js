@@ -2,7 +2,6 @@ import {GET_POSTS, POST_POST, GET_POST} from '../actions/index';
 import _ from 'lodash';
 
 export default function(state = {}, action) {
-    console.log(action.payload)
     switch (action.type) {
         case GET_POSTS:
         return _.mapKeys(action.payload.data, '_id');

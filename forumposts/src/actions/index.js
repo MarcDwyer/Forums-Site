@@ -12,7 +12,7 @@ export function getPosts() {
 }
 
 export function createPost(post, callback) {
-    console.log(post);
+
      axios.post('/api/create', qs.stringify(post))
                     .then(callback());
 

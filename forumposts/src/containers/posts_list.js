@@ -11,6 +11,7 @@ class App extends Component {
     this.props.getPosts();
   }
   render() {
+    console.log(this.props)
     if (!this.props.posts) return (<h6>Loading...</h6>);
     return (
       <div>

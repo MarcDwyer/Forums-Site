@@ -10,16 +10,13 @@ class PostShow extends Component {
     }
     render() {
         console.log(this.props);
-        const {posts} = this.props;
-            if(!posts) {
+        const {post} = this.props;
+            if(!post) {
                 return <div>Loading...</div>
             }
             return (
             <div>
-                <button className="btn btn-danger pull-xs-right" onClick={this.onDelete.bind(this)}> Delete </button>
-                <h3>{this.props.posts.title}</h3>
-                <h6></h6>
-                <p></p>
+                <h3>{this.props.post.title}</h3>
                 <Link to="/" className="btn btn-warning">Go back</Link>
             </div>
         );
@@ -28,8 +25,8 @@ class PostShow extends Component {
 
 function getProps({posts}, ownProps) {
     return {
-        posts: posts[ownProps.match.params._id]
-    }
+        post: posts[ownProps.match.params.id]   
+        }
 }
 
 export default connect(getProps, {getPost})(PostShow);
