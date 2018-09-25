@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {getPost} from '../actions/index';
 import {Link} from 'react-router-dom';
+import Navbar from '../components/navbar';
 
 class PostShow extends Component {
     componentDidMount() {
@@ -9,15 +10,23 @@ class PostShow extends Component {
         this.props.getPost(id);
     }
     render() {
-        console.log(this.props);
         const {post} = this.props;
             if(!post) {
-                return <div>Loading...</div>
+                return (
+                    <div>
+                    <Navbar />
+                    <div>Loading...</div>
+                    </div>
+                    );
             }
             return (
             <div>
+                <Navbar />
+                <div className="container">
                 <h3>{this.props.post.title}</h3>
+                <p>{this.props.post.body}</p>
                 <Link to="/" className="btn btn-warning">Go back</Link>
+                </div>
             </div>
         );
     }

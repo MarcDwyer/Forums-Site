@@ -14,13 +14,6 @@ body {
   column-gap: 15px;
   margin-top: 10px;
 }
-
-h6 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  text-align: center;
-}
 .reddead input{
   border: 1px solid red;
 }
@@ -29,7 +22,22 @@ h6 {
   margin-bottom: 25px;
 }
 
-
+.remove {
+  height: 100px !important;
+  text-decoration: none;
+  color: black;
+}
+.remove:hover {
+  text-decoration: none;
+  color: black;
+}
+.list-group-item:hover {
+  border: 1px solid black;
+}
 ::-webkit-input-placeholder {
   text-align: center;
+}
+
+.list-group-item {
+  height: 85px;
 }

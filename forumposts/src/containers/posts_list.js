@@ -11,7 +11,7 @@ class App extends Component {
     this.props.getPosts();
   }
   render() {
-    console.log(this.props)
+
     if (!this.props.posts) return (<h6>Loading...</h6>);
     return (
       <div>
@@ -20,9 +20,9 @@ class App extends Component {
       <div className="fix">
       <Link className="btn float-left help" to="/create-post">Create Post</Link>
       </div>
-      <div className='gridder'>
+      <ul className='form-group'>
       {this.renderPosts()}
-      </div>
+      </ul>
       </div>
       </div>
     );
@@ -32,17 +32,16 @@ class App extends Component {
    return _.map(posts, post => {
     const path = `/posts/${post._id}`;
     return (
-
-      <div key={post._id || post.key} className="card border-dark mb-3">
-  <div className="card-header">{post.title}</div>
-  <div className="card-body text-dark">
-    <p className="card-text">{post.body}</p>
+      <div key={post._id || post.key} className="posts">
+        <Link className="remove" to={path}>
+      <li className="list-group-item">
+      <h6>{post.title}</h6>
+      </li>
+      </Link>
       </div>
-      <Link  to={path} className="btn btn-dark">View Post</Link>
-      </div>
-    );
-   })
-  }
+   );
+  })
+}
 }
 
 function getProps(state) {
