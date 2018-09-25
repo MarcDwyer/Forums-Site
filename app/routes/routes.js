@@ -22,7 +22,6 @@ module.exports = function(app, db) {
 })
 app.get('/api/find', (req, res) => {
     let param = req.query._id;
-    
      db.collection('data').findOne({'_id' : ObjectId(param)}, (err, result) => {
         if (err) {
             res.send({'error': 'error has occured'})

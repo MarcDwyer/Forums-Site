@@ -17,11 +17,13 @@ body {
 .reddead input{
   border: 1px solid red;
 }
+.reddead textarea{
+  border: 1px solid red;
+}
 .fixer {
   margin-top: 25px;
   margin-bottom: 25px;
 }
-
 .remove {
   height: 100px !important;
   text-decoration: none;
@@ -40,4 +42,7 @@ body {
 
 .list-group-item {
   height: 85px;
+}
+.thepost {
+  border-bottom: 1px solid #eee;
 }

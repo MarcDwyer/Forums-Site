@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {getPost} from '../actions/index';
 import {Link} from 'react-router-dom';
 import Navbar from '../components/navbar';
-
 class PostShow extends Component {
     componentDidMount() {
         const {id} = this.props.match.params;
@@ -12,21 +11,20 @@ class PostShow extends Component {
     render() {
         const {post} = this.props;
             if(!post) {
-                return (
-                    <div>
-                    <Navbar />
-                    <div>Loading...</div>
-                    </div>
-                    );
+                return <div>Loading...</div>
             }
             return (
-            <div>
-                <Navbar />
-                <div className="container">
-                <h3>{this.props.post.title}</h3>
-                <p>{this.props.post.body}</p>
+                <div>
+                    <Navbar />
+            <div className="container">
+            <div className="thepost mb-4 mt-4">
+                <h3>{post.title}</h3>    
+                <p>{post.body}</p>
+                <div className="buttons mb-2">
                 <Link to="/" className="btn btn-warning">Go back</Link>
                 </div>
+                </div>
+            </div>
             </div>
         );
     }
