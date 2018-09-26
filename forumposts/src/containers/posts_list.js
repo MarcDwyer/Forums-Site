@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div key={post._id || post.key} className="posts">
         <Link className="remove" to={path}>
-      <li className="list-group-item">
+      <li className="list-group-item posters">
       <h6>{post.title}</h6>
       </li>
       </Link>

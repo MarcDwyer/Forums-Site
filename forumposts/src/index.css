@@ -33,14 +33,14 @@ body {
   text-decoration: none;
   color: black;
 }
-.list-group-item:hover {
+.posters:hover {
   border: 1px solid black;
 }
 ::-webkit-input-placeholder {
   text-align: center;
 }
 
-.list-group-item {
+.posters {
   height: 85px;
 }
 .thepost {

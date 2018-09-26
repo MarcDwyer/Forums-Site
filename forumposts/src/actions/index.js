@@ -3,6 +3,8 @@ import qs from 'qs'
 export const GET_POST = 'getpost';
 export const GET_POSTS = 'getposts';
 export const POST_POST = 'posterofposts';
+export const POST_COMMENT = 'postcoment';
+
 export function getPosts() {
     const request = axios.get('/api/data');
     return {
@@ -31,5 +33,18 @@ export function getPost(id) {
     return {
         type: GET_POST,
         payload: req
+    }
+}
+
+export function postComment(id, comment) {
+    const obj = {
+        _id: id,
+        comment: comment
+    }
+    const str = qs.stringify(obj);
+     axios.put('/api/add', str)    
+    return {
+        type: POST_COMMENT,
+        payload: obj
     }
 }
