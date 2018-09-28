@@ -14,8 +14,13 @@ export function getPosts() {
 }
 
 export function createPost(post, callback) {
+    const newPost = {
+        title: post.title,
+        body: post.body,
+        date: new Date()
+    }
 
-     axios.post('/api/create', qs.stringify(post))
+     axios.post('/api/create', qs.stringify(newPost))
                     .then(callback());
 
     return {

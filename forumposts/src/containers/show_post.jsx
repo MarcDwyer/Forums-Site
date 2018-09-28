@@ -9,7 +9,12 @@ class PostShow extends Component {
     componentDidMount() {
         const {id} = this.props.match.params;
         this.props.getPost(id);
-    }
+
+        document.body.addEventListener('keydown', (e) => {
+            if (e.keyCode === 27) this.props.history.push('/');
+            return;
+            })
+        }
     render() {
         const {post} = this.props;
             if(!post) {
@@ -18,12 +23,14 @@ class PostShow extends Component {
             return (
                 <div>
                     <Navbar />
-            <div className="container">
+            <div className="container makewhite mt-3">
+            <div className="mt-3">
+            <Link to="/" className="btn btn-warning">Go back</Link>
+            </div>
             <div className="thepost mb-4 mt-4">
                 <h3>{post.title}</h3>    
                 <p>{post.body}</p>
                 <div className="buttons mb-2">
-                <Link to="/" className="btn btn-warning">Go back</Link>
                 </div>
                 </div>
                 <textarea
@@ -33,7 +40,8 @@ class PostShow extends Component {
                 placeholder="What are your thoughts?"
                 />
                 <button onClick={(e) => this.updateComment(e)} type="submit" className="btn">Comment</button>
-                <ul className="list-group comments">
+                <ul className="list-group comments mt-4">
+                <h4>Comments</h4>
                 {this.renderComments()}
             </ul>
             </div>
@@ -55,11 +63,16 @@ class PostShow extends Component {
     }
     renderComments() {
         const {comments} = this.props.post;
-        return comments.map(comment => {
-            return (
-                <li className="list-group-item" key={uuid()}>{comment}</li>
-            );
-        })
+        if (comments.length === 0) {
+            return <h6>No comments...</h6>
+        } else {
+            return comments.map(comment => {
+                return (
+                    <li className="list-group-item comments" key={uuid()}>{comment}</li>
+                );
+            })
+        }
+
     }
 }
 

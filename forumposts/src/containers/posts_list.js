@@ -11,6 +11,7 @@ class App extends Component {
     this.props.getPosts();
   }
   render() {
+    
 
     if (!this.props.posts) return (<h6>Loading...</h6>);
     return (
@@ -18,9 +19,9 @@ class App extends Component {
         <Navbar posts={this.props.posts} />
       <div className="App container">
       <div className="fix">
-      <Link className="btn float-left help" to="/create-post">Create Post</Link>
+      <Link className="btn btn-primary help mt-3 mb-3" to="/create-post">Create Post</Link>
       </div>
-      <ul className='form-group'>
+      <ul className='form-group cmt'>
       {this.renderPosts()}
       </ul>
       </div>
@@ -36,6 +37,7 @@ class App extends Component {
         <Link className="remove" to={path}>
       <li className="list-group-item posters">
       <h6>{post.title}</h6>
+      <small><span>{!post.comments ? '0' : post.comments.length} comments</span></small>
       </li>
       </Link>
       </div>
@@ -44,9 +46,9 @@ class App extends Component {
 }
 }
 
-function getProps(state) {
+function getProps({posts}) {
   return {
-    posts: state.posts
+    posts
   }
 }
 

@@ -11,7 +11,7 @@ module.exports = function(app, db) {
 })
 })
     app.post('/api/create', (req, res) => {
-        const obj = { title: req.body.title, body: req.body.body, comments: []};
+        const obj = { title: req.body.title, body: req.body.body, comments: [], date: req.body.date};
          db.collection('data').insert(obj, (err, result) => {
             if (err) {
                 res.send({'error': 'error has occured'})
@@ -41,4 +41,14 @@ app.put('/api/add', (req, res) => {
     }
 })
 })
-};
+app.put('/api/login', (req, res) => {
+
+     db.collection('data').insert({'_id' : ObjectId(id)}, {$push: {comments: comment}}, (err, result) => {
+        if (err) {
+            res.send({'error': 'error has occured'})
+        } else {
+            res.send('Command Confirmed')
+    }
+})
+})
+}
