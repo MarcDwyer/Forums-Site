@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
-import registerServiceWorker from './registerServiceWorker';
+import { unregister } from './registerServiceWorker';
 import reducers from './reducers';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'; 
 
@@ -14,15 +14,15 @@ import PostShow from './containers/show_post';
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-
+unregister();
 ReactDOM.render(<Provider store={createStoreWithMiddleware(reducers)}>
 <BrowserRouter>
 <Switch>
-    <Route path="/create-post" component={CreatePost}/>
-    <Route path="/posts/:id" component={PostShow} />
-    <Route path="/" component={PostsList}/>
+    <Route exact path="/create-post" component={CreatePost}/>
+    <Route exact path="/posts/:id" component={PostShow} />
+    <Route path="/" exact component={PostsList}/>
 </Switch>
 </BrowserRouter>
 </Provider>
-, document.getElementById('root'));
-registerServiceWorker();
+,document.getElementById('root'));
+

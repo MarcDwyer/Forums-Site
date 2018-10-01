@@ -1,6 +1,8 @@
 const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function(app, db) {
+
+
     app.get('/api/data', (req, res) => {
         db.collection('data').find({}).toArray((err, result) => {
             if (err) {
@@ -38,16 +40,6 @@ app.put('/api/add', (req, res) => {
             res.send({'error': 'error has occured'})
         } else {
             res.send(result)
-    }
-})
-})
-app.put('/api/login', (req, res) => {
-
-     db.collection('data').insert({'_id' : ObjectId(id)}, {$push: {comments: comment}}, (err, result) => {
-        if (err) {
-            res.send({'error': 'error has occured'})
-        } else {
-            res.send('Command Confirmed')
     }
 })
 })

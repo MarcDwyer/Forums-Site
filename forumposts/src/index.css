@@ -49,3 +49,10 @@ body {
   background-color: white;
   border-radius: 5px;
 }
+
+.loginmarg {
+  margin-right: 200px;
+}
+.google {
+  background-color: orange;
+}

@@ -1,9 +1,11 @@
 import axios from 'axios';
 import qs from 'qs'
+import { userInfo } from 'os';
 export const GET_POST = 'getpost';
 export const GET_POSTS = 'getposts';
 export const POST_POST = 'posterofposts';
 export const POST_COMMENT = 'postcoment';
+export const USER = 'getuser';
 
 export function getPosts() {
     const request = axios.get('/api/data');
@@ -52,4 +54,13 @@ export function postComment(id, comment) {
         type: POST_COMMENT,
         payload: obj
     }
+}
+
+export function getUser() {
+   const req = axios.get('/login');
+   return {
+       type: USER,
+       payload: req
+
+   }
 }
