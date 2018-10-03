@@ -1,4 +1,4 @@
-import {GET_POSTS, POST_POST, GET_POST, POST_COMMENT} from '../actions/index';
+import {GET_POSTS, POST_POST, GET_POST, POST_COMMENT, DELETE_POST} from '../actions/index';
 import update from 'immutability-helper';
 import _ from 'lodash';
 import uuid from 'uuid';
@@ -10,8 +10,7 @@ export default function(state = {}, action) {
     }
     switch(action.type) {
         case POST_POST:
-        action.payload.key = uuid();
-        return [action.payload, ...state];
+        return {$merge: action.payload.data};
     }
 
     switch(action.type) {
@@ -22,9 +21,13 @@ export default function(state = {}, action) {
         case POST_COMMENT:
         return update(state, {
             [action.payload._id]: {
-                comments: {$push: [action.payload.comment]}
+                comments: {$push: [action.payload]}
             }
         })
+    }
+    switch(action.type) {
+        case DELETE_POST:
+        return _.omit(state, action.payload);
     }
     return state
 }

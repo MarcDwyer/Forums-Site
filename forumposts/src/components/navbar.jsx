@@ -10,15 +10,14 @@ class Navbar extends Component {
     }
 render() {
     const {user} = this.props;
-    console.log(user)
     return (
-        <nav className="navbar navbar-dark bg-dark justify-content-between">
-  <Link to="/" className="navbar-brand">Radit</Link>
+        <nav className="navbar navbar-light bg-light justify-content-between">
+  <Link to="/" className="navbar-brand">Fetcherapp Forum Edition</Link>
   <div className="dropdown show">
   <a className="btn btn-success dropdown-toggle loginmarg" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {user ? user.user: 'Sign In'}
   </a>
-  <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+  <div className="dropdown-menu dropwider float-none" aria-labelledby="dropdownMenuLink">
         {this.renderAuth()}
   </div>
 </div>
@@ -29,11 +28,16 @@ renderAuth() {
     const {user} = this.props;
     if (user) {
         return (
+            <div className="profileview">
             <a href="/auth/google" target="_self" className="btn">Check Posts</a>
+            <a href="http://localhost:5000/auth/logout" target="_self" className="btn">Logout</a>
+            </div>
         )
     } else {
         return(
-            <a href="/auth/google" target="_self" className="btn">Sign in with Google+</a>
+            <div className="centergoogle">
+            <a href="http://localhost:5000/auth/google" target="_self" className="btn btn-light googlebut align-middle">Sign in with Google+</a>
+            </div>
         );
     }
 }

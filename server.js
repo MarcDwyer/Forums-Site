@@ -33,6 +33,7 @@ app.get('/login', (req, res) => {
 
 
 app.use('/auth', authRoutes)
+
 MongoClient.connect(db.url, (err, database) => {
     if (err) console.log(err);
     require('./app/routes')(app, database)  
@@ -40,7 +41,7 @@ app.listen(port, () => {
 })
 })
 
-// app.use('/', express.static('./forumposts/build'));
+   app.use('/', express.static('./forumposts/build'));
 
 
 mongoose.connect(db.url, () => {

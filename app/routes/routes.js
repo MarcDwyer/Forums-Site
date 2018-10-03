@@ -13,12 +13,12 @@ module.exports = function(app, db) {
 })
 })
     app.post('/api/create', (req, res) => {
-        const obj = { title: req.body.title, body: req.body.body, comments: [], date: req.body.date};
+        const obj = { username: req.body.username, title: req.body.title, body: req.body.body, comments: [], date: req.body.date};
          db.collection('data').insert(obj, (err, result) => {
             if (err) {
                 res.send({'error': 'error has occured'})
             } else {
-                res.send(result.ops[0])
+                res.send(result.ops)
         }
 })
 })
@@ -34,12 +34,24 @@ app.get('/api/find', (req, res) => {
 })
 app.put('/api/add', (req, res) => {
     const id = req.body._id;
-    const comment = req.body.comment
-     db.collection('data').updateOne({'_id' : ObjectId(id)}, {$push: {comments: comment}}, (err, result) => {
+    const obj = {
+        user: req.body.user,
+        comment: req.body.comment
+    }
+     db.collection('data').updateOne({'_id' : ObjectId(id)}, {$push: {comments: obj}}, (err, result) => {
         if (err) {
             res.send({'error': 'error has occured'})
         } else {
             res.send(result)
+    }
+})
+})
+app.delete('/api/delete', (req, res) => {
+     db.collection('data').deleteOne({'_id' : ObjectId(req.query._id)}, (err, result) => {
+        if (err) {
+            res.send({'error': 'error has occured'})
+        } else {
+            res.send(result.ops)
     }
 })
 })

@@ -1,11 +1,12 @@
 import axios from 'axios';
 import qs from 'qs'
-import { userInfo } from 'os';
 export const GET_POST = 'getpost';
 export const GET_POSTS = 'getposts';
 export const POST_POST = 'posterofposts';
 export const POST_COMMENT = 'postcoment';
 export const USER = 'getuser';
+export const DELETE_POST = 'del';
+
 
 export function getPosts() {
     const request = axios.get('/api/data');
@@ -17,17 +18,18 @@ export function getPosts() {
 
 export function createPost(post, callback) {
     const newPost = {
+        username: post.username,
         title: post.title,
         body: post.body,
         date: new Date()
     }
 
-     axios.post('/api/create', qs.stringify(newPost))
-                    .then(callback());
+     const req = axios.post('/api/create', qs.stringify(newPost))
+                    .then(() => callback());
 
     return {
         type: POST_POST,
-        payload: post
+        payload: req
     }
 }
 
@@ -43,10 +45,12 @@ export function getPost(id) {
     }
 }
 
-export function postComment(id, comment) {
+export function postComment(id, comment, username) {
+    const newuser = !username ? 'Anonymous' : username;
     const obj = {
         _id: id,
-        comment: comment
+        comment: comment,
+        user: newuser
     }
     const str = qs.stringify(obj);
      axios.put('/api/add', str)    
@@ -61,6 +65,20 @@ export function getUser() {
    return {
        type: USER,
        payload: req
-
    }
+}
+
+export function deletePoster(id, callback) {
+   axios.delete('/api/delete', {
+       params: {
+           _id: id
+       }
+   })
+   .then(() => callback());
+ return {
+     type: DELETE_POST,
+     case: id
+ }
+
+
 }

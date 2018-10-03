@@ -7,7 +7,15 @@ import {Link} from 'react-router-dom';
 
 class CreatePost extends Component {
     render() {
-        const {handleSubmit} = this.props;
+        const {handleSubmit, user} = this.props;
+        if (!user) {
+            return (
+                <div>
+                    <Navbar />
+                <h4>Please sign in to create a post</h4>
+                </div>
+            );
+        }
         return (
             <div>
                 <Navbar />
@@ -61,10 +69,15 @@ class CreatePost extends Component {
 
     }
     onSubmit(values) {
-    
+        values.username = this.props.user.user;
         this.props.createPost(values, () => {
             this.props.history.push('/');
         })
+    }
+}
+function getProps({user}) {
+    return {
+        user
     }
 }
 function validate(values) {
@@ -80,4 +93,4 @@ function validate(values) {
 export default reduxForm({
     validate,
     form: 'PostsNewForm'
-})(connect(null, {createPost})(CreatePost));
+})(connect(getProps, {createPost})(CreatePost));
