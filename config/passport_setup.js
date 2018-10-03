@@ -2,7 +2,7 @@ const passport = require('passport');
 const GoogleStrat = require('passport-google-oauth20');
 // const keys = require('./keys');
 const User = require('../app/models/user-model');
-const aws = requrie('aws-sdk');
+const aws = require('aws-sdk');
 
 let s3 = new aws.S3({
     clientID: process.env.CLIENTID,
