@@ -2,13 +2,7 @@ const passport = require('passport');
 const GoogleStrat = require('passport-google-oauth20');
 // const keys = require('./keys');
 const User = require('../app/models/user-model');
-const aws = require('aws-sdk');
-
-let s3 = new aws.S3({
-    clientID: process.env.CLIENTID,
-    clientSecret: process.env.CLIENTSECRET
-})
-
+require('dotenv').config();
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -19,11 +13,11 @@ passport.deserializeUser((id, done) => {
     })
 })
 
-
 passport.use(new GoogleStrat({
 callbackURL: '/auth/google/redirect',
 clientID: process.env.CLIENTID,
-clientSecret: process.env.CLIENTSECRET
+clientSecret: process.env.CLIENTSECRET,
+proxy: true
 }, (accessToken, refreshToken, profile, done) => {
     User.findOne({
         googleId: profile.id
