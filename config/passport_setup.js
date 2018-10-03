@@ -22,8 +22,8 @@ passport.deserializeUser((id, done) => {
 
 passport.use(new GoogleStrat({
 callbackURL: '/auth/google/redirect',
-clientID: s3.clientID,
-clientSecret: s3.clientSecret
+clientID: process.env.CLIENTID,
+clientSecret: process.env.CLIENTSECRET
 }, (accessToken, refreshToken, profile, done) => {
     User.findOne({
         googleId: profile.id

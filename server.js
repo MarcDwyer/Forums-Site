@@ -20,7 +20,7 @@ let s3 = new aws.S3({
 
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [s3.secretKey] 
+    keys: [process.env.SECRET] 
 }))
 
 app.use(passport.initialize());
