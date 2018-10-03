@@ -9,14 +9,18 @@ const authRoutes = require('./app/routes/authroutes');
 const mongoose = require('mongoose');   
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const aws = require('aws-sdk')
 
 const port = process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({ extended: true}))
 
+let s3 = new aws.S3({ 
+    secretKey: process.env.SECRET
+});
 
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.secret] 
+    keys: [s3.secretKey] 
 }))
 
 app.use(passport.initialize());
